@@ -1,3 +1,5 @@
+import { VENISON, CUSTOM } from '../data/locations'
+
 export default function Hero() {
   return (
     <div className="hero-layout">
@@ -28,38 +30,34 @@ export default function Hero() {
 
       <aside className="hero-panel" aria-label="Business details">
         <div className="panel-callout">
-          <span className="panel-label">Call us today</span>
-          <a href="tel:9899061617">(989) 906-1617</a>
+          <span className="panel-label">Beef, Pork &amp; Lamb</span>
+          <a href={`tel:${CUSTOM.phone}`}>{CUSTOM.phoneDisplay}</a>
+        </div>
+
+        <div className="panel-callout">
+          <span className="panel-label">Venison Processing</span>
+          <a href={`tel:${VENISON.phone}`}>{VENISON.phoneDisplay}</a>
         </div>
 
         <div className="panel-services">
           <span className="panel-label">We process</span>
-          <div className="panel-tags">
-            <span>| Beef | </span>
-            <span>Pork | </span>
-            <span>Lamb | </span>
-            <span>Venison | </span>
-          </div>
+          <p className="panel-services-list">
+            Beef <span className="panel-sep">&middot;</span> Pork <span className="panel-sep">&middot;</span> Lamb <span className="panel-sep">&middot;</span> Venison
+          </p>
         </div>
 
         <div className="panel-block">
-          <span className="panel-label">Location</span>
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=11285+Schoolcrest+Avenue+Clare+MI+48617"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="panel-address"
-          >
-            11285 Schoolcrest Avenue
-            <br />
-            Clare, MI 48617
+          <span className="panel-label">Custom Processing</span>
+          <a href={CUSTOM.mapsUrl} target="_blank" rel="noopener noreferrer" className="panel-address">
+            {CUSTOM.address}<br />{CUSTOM.city}
           </a>
         </div>
 
-        <div className="panel-block">
-          <span className="panel-label">Hours</span>
-          <p>Mon - Fri: 8:00 AM - 5:00 PM</p>
-          <p className="panel-hours-note">Sat by appointment</p>
+        <div className="panel-block panel-block--last">
+          <span className="panel-label">Venison Drop-off</span>
+          <a href={VENISON.mapsUrl} target="_blank" rel="noopener noreferrer" className="panel-address">
+            {VENISON.address}<br />{VENISON.city}
+          </a>
         </div>
       </aside>
     </div>

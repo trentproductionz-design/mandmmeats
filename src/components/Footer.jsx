@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom'
-
-const MAPS_URL =
-  'https://www.google.com/maps/search/?api=1&query=11285+Schoolcrest+Avenue+Clare+MI+48617'
+import { VENISON, CUSTOM } from '../data/locations'
 
 const hours = [
-  { day: 'Monday', time: '8:00 AM - 5:00 PM' },
-  { day: 'Tuesday', time: '8:00 AM - 5:00 PM' },
-  { day: 'Wednesday', time: '8:00 AM - 5:00 PM' },
-  { day: 'Thursday', time: '8:00 AM - 5:00 PM' },
-  { day: 'Friday', time: '8:00 AM - 5:00 PM' },
+  { day: 'Monday', time: '8:00 AM – 5:00 PM' },
+  { day: 'Tuesday', time: '8:00 AM – 5:00 PM' },
+  { day: 'Wednesday', time: '8:00 AM – 5:00 PM' },
+  { day: 'Thursday', time: '8:00 AM – 5:00 PM' },
+  { day: 'Friday', time: '8:00 AM – 5:00 PM' },
   { day: 'Saturday', time: 'By Appointment' },
   { day: 'Sunday', time: 'Closed' },
 ]
@@ -56,14 +54,25 @@ export default function Footer() {
 
         <div className="footer-contact">
           <h4>Contact</h4>
-          <a href="tel:9899061617">(989) 906-1617</a>
-          <a href="mailto:mandmmeatprocessing@gmail.com">
-            mandmmeatprocessing@gmail.com
-          </a>
-          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer">
-            11285 Schoolcrest Avenue
-            <br />
-            Clare, MI 48617
+
+          <div className="footer-location">
+            <span className="footer-location-label">{VENISON.label}</span>
+            <a href={`tel:${VENISON.phone}`}>{VENISON.phoneDisplay}</a>
+            <a href={VENISON.mapsUrl} target="_blank" rel="noopener noreferrer">
+              {VENISON.address}<br />{VENISON.city}
+            </a>
+          </div>
+
+          <div className="footer-location">
+            <span className="footer-location-label">{CUSTOM.label}</span>
+            <a href={`tel:${CUSTOM.phone}`}>{CUSTOM.phoneDisplay}</a>
+            <a href={CUSTOM.mapsUrl} target="_blank" rel="noopener noreferrer">
+              {CUSTOM.address}<br />{CUSTOM.city}
+            </a>
+          </div>
+
+          <a href={`mailto:${VENISON.email}`} className="footer-email">
+            {VENISON.email}
           </a>
         </div>
       </div>

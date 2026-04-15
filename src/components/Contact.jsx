@@ -1,10 +1,13 @@
-const MAPS_URL =
-  'https://www.google.com/maps/search/?api=1&query=11285+Schoolcrest+Avenue+Clare+MI+48617'
+import { VENISON, CUSTOM } from '../data/locations'
 
-const MAPS_EMBED_URL =
-  'https://www.google.com/maps?q=11285+Schoolcrest+Avenue+Clare+MI+48617&output=embed'
+// When loc is provided: single-location layout with map (subpages).
+// When loc is omitted: dual-location layout without map (homepage).
+export default function Contact({ loc }) {
+  if (loc) return <SingleContact loc={loc} />
+  return <DualContact />
+}
 
-export default function Contact() {
+function SingleContact({ loc }) {
   return (
     <section className="content-section contact-section" id="contact">
       <div className="contact-card">
@@ -18,10 +21,13 @@ export default function Contact() {
           </p>
 
           <div className="contact-actions">
-            <a className="button button-primary" href="tel:9899061617">
+            <a className="button button-primary" href={`tel:${loc.phone}`}>
               Call now
             </a>
-            <a className="button button-secondary" href="mailto:mandmmeatprocessing@gmail.com">
+            <a
+              className="button button-secondary"
+              href={`mailto:${loc.email}`}
+            >
               Send email
             </a>
           </div>
@@ -30,24 +36,22 @@ export default function Contact() {
             <div className="contact-fact">
               <dt>Phone</dt>
               <dd>
-                <a href="tel:9899061617">(989) 906-1617</a>
+                <a href={`tel:${loc.phone}`}>{loc.phoneDisplay}</a>
                 <span>Call for scheduling and questions</span>
               </dd>
             </div>
             <div className="contact-fact">
               <dt>Email</dt>
               <dd>
-                <a href="mailto:mandmmeatprocessing@gmail.com">
-                  mandmmeatprocessing@gmail.com
-                </a>
+                <a href={`mailto:${loc.email}`}>{loc.email}</a>
                 <span>Send details any time</span>
               </dd>
             </div>
             <div className="contact-fact">
               <dt>Location</dt>
               <dd>
-                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer">
-                  11285 Schoolcrest Avenue, Clare, MI 48617
+                <a href={loc.mapsUrl} target="_blank" rel="noopener noreferrer">
+                  {loc.address}, {loc.city}
                 </a>
                 <span>Open in maps</span>
               </dd>
@@ -58,14 +62,14 @@ export default function Contact() {
         <div className="contact-details">
           <a
             className="contact-map"
-            href={MAPS_URL}
+            href={loc.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open location in Google Maps"
           >
             <iframe
-              title="Map showing M&M Meat Processing in Clare, Michigan"
-              src={MAPS_EMBED_URL}
+              title={`Map showing M&M Meat Processing at ${loc.address}`}
+              src={loc.mapsEmbedUrl}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
@@ -74,6 +78,61 @@ export default function Contact() {
               <span className="contact-map-pill">Open in Google Maps</span>
             </span>
           </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function DualContact() {
+  return (
+    <section className="content-section contact-section" id="contact">
+      <div className="contact-card contact-card--dual">
+        <div className="contact-intro">
+          <p className="eyebrow">Get in touch</p>
+          <h2>Ready to get started?</h2>
+          <p className="contact-copy">
+            We operate two locations in Clare — one for venison during hunting
+            season and one for beef, pork, and lamb year-round. Give us a call
+            at the right number below and we will get you on the schedule.
+          </p>
+        </div>
+
+        <div className="contact-locations">
+          {[VENISON, CUSTOM].map((loc) => (
+            <div key={loc.phone} className="contact-location">
+              <h3 className="contact-location-label">{loc.label}</h3>
+              <dl className="contact-facts">
+                <div className="contact-fact">
+                  <dt>Phone</dt>
+                  <dd>
+                    <a href={`tel:${loc.phone}`}>{loc.phoneDisplay}</a>
+                  </dd>
+                </div>
+                <div className="contact-fact">
+                  <dt>Email</dt>
+                  <dd>
+                    <a href={`mailto:${loc.email}`}>{loc.email}</a>
+                  </dd>
+                </div>
+                <div className="contact-fact">
+                  <dt>Location</dt>
+                  <dd>
+                    <a
+                      href={loc.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {loc.address}
+                      <br />
+                      {loc.city}
+                    </a>
+                    <span>Open in maps</span>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          ))}
         </div>
       </div>
     </section>

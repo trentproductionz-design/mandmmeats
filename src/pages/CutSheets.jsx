@@ -5,6 +5,9 @@ import SubpageHero from '../components/SubpageHero'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
 import BeefCutSheet from './BeefCutSheet'
+import { CUSTOM } from '../data/locations'
+import PorkCutSheet from './PorkCutSheet'
+import LambCutSheet from './LambCutSheet'
 
 const ANIMALS = [
   {
@@ -17,13 +20,13 @@ const ANIMALS = [
     id: 'pork',
     name: 'Pork',
     desc: 'Chops, roasts, hams, and more for your whole or half hog.',
-    available: false,
+    available: true,
   },
   {
     id: 'lamb',
     name: 'Lamb',
     desc: 'Rack, chops, leg, shoulder, and specialty cuts for your whole or half lamb.',
-    available: false,
+    available: true,
   },
 ]
 
@@ -77,7 +80,7 @@ export default function CutSheets() {
           { label: 'Start cut sheet', href: '#cutsheet-form' },
           {
             label: 'Call with questions',
-            href: 'tel:9899061617',
+            href: `tel:${CUSTOM.phone}`,
             variant: 'secondary',
           },
         ]}
@@ -87,6 +90,10 @@ export default function CutSheets() {
         <div className="cutsheet-shell">
           {selectedAnimal === 'beef' ? (
             <BeefCutSheet onBack={() => setSelectedAnimal(null)} />
+          ) : selectedAnimal === 'pork' ? (
+            <PorkCutSheet onBack={() => setSelectedAnimal(null)} />
+          ) : selectedAnimal === 'lamb' ? (
+            <LambCutSheet onBack={() => setSelectedAnimal(null)} />
           ) : (
             <AnimalSelector onSelect={setSelectedAnimal} />
           )}

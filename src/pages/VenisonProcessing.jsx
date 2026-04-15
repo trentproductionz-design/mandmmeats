@@ -4,6 +4,7 @@ import SubpageHero from '../components/SubpageHero'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
+import { VENISON } from '../data/locations'
 
 const pricing = [
   {
@@ -127,7 +128,7 @@ export default function VenisonProcessing() {
       </section>
 
       <div className="reveal">
-        <Contact />
+        <Contact loc={VENISON} />
       </div>
 
       <Footer />

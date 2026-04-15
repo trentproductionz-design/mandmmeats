@@ -12,7 +12,6 @@ import CutsGuide from './components/CutsGuide'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
-import PriceIncreaseModal from './components/PriceIncreaseModal'
 
 function App() {
   useReveal()
@@ -86,7 +85,6 @@ function App() {
 
       <Footer />
       <ScrollToTop />
-      <PriceIncreaseModal />
     </main>
   )
 }

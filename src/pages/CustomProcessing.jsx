@@ -4,6 +4,7 @@ import SubpageHero from '../components/SubpageHero'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import ScrollToTop from '../components/ScrollToTop'
+import { CUSTOM } from '../data/locations'
 
 const pricing = [
   {
@@ -75,7 +76,7 @@ export default function CustomProcessing() {
         }
         description="Beef, pork, and lamb processed by skilled butchers with years behind the block. Clear pricing, straightforward scheduling, and cuts you can trust from drop-off to pickup."
         actions={[
-          { label: 'Call to schedule', href: 'tel:9899061617' },
+          { label: 'Call to schedule', href: `tel:${CUSTOM.phone}` },
           { label: 'See pricing', href: '#pricing', variant: 'secondary' },
         ]}
       />
@@ -130,7 +131,7 @@ export default function CustomProcessing() {
       </section>
 
       <div className="reveal">
-        <Contact />
+        <Contact loc={CUSTOM} />
       </div>
 
       <Footer />
