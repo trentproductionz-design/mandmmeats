@@ -6,7 +6,7 @@ const cutGuides = [
     label: 'Beef',
     displayName: 'Beef',
     title: 'Beef cut reference',
-    image: '/Cattle.png',
+    image: '/Cattle-centered.png',
     alt: 'Cow cuts diagram showing different beef sections',
     copy:
       'Use this as a quick reference when talking through steaks, roasts, ground, and slower-cooking cuts.',
@@ -29,7 +29,7 @@ const cutGuides = [
     label: 'Pork',
     displayName: 'Hog',
     title: 'Pork cut reference',
-    image: '/Hog.png',
+    image: '/Hog-centered.png',
     alt: 'Pork cut sheet guide showing different pork sections',
     copy:
       'Helpful for thinking through chops, bacon, ham, shoulder, sausage, and smoked options before filling out the sheet.',
@@ -40,7 +40,7 @@ const cutGuides = [
     label: 'Lamb',
     displayName: 'Lamb',
     title: 'Lamb cut reference',
-    image: '/Lamb.png',
+    image: '/Lamb-centered.png',
     alt: 'Lamb cut sheet guide showing different lamb sections',
     copy:
       'A simpler way to understand chops, rack, shoulder, leg, shank, and ground options at a glance.',
@@ -76,6 +76,29 @@ export default function CutsGuide() {
         </div>
 
         <div className="cuts-guide-shell">
+          <div
+            className="cuts-mobile-nav"
+            role="tablist"
+            aria-label="Choose a cut guide"
+          >
+            {cutGuides.map((guide) => {
+              const isSelected = guide.id === activeGuide.id
+
+              return (
+                <button
+                  key={guide.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  className={`cuts-mobile-chip${isSelected ? ' is-active' : ''}`}
+                  onClick={() => setActiveGuideId(guide.id)}
+                >
+                  {guide.displayName}
+                </button>
+              )
+            })}
+          </div>
+
           <div className="cuts-visual-stage" aria-label="Cuts guide carousel">
             {displayGuides.map(({ guide, position }) => {
               const isActive = position === 'center'
@@ -84,7 +107,7 @@ export default function CutsGuide() {
                 <button
                   key={`${guide.id}-${position}`}
                   type="button"
-                  className={`cuts-stage-card cuts-stage-card-${position}${isActive ? ' cuts-stage-card-active' : ''}`}
+                  className={`cuts-stage-card cuts-stage-card-${position} cuts-stage-card-${guide.id}${isActive ? ' cuts-stage-card-active' : ''}`}
                   onClick={() => setActiveGuideId(guide.id)}
                   aria-pressed={isActive}
                   aria-label={`Show ${guide.displayName} cut reference`}

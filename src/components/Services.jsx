@@ -5,12 +5,14 @@ const serviceCategories = [
     title: 'Custom Processing',
     description:
       'Beef, pork, and lamb processing with clear cut guidance and practical communication from drop-off to pickup.',
+    detail: 'Phone: (989) 386-0166',
     to: '/custom-processing',
   },
   {
     title: 'Venison Processing',
     description:
       'Straightforward wild game processing with specialty options and handling hunters can feel confident about.',
+    detail: 'Phone: (989) 906-1617',
     to: '/venison-processing',
   },
 ]
@@ -29,6 +31,7 @@ export default function Services() {
             <span className="service-kicker">Service</span>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
+            {item.detail ? <p>{item.detail}</p> : null}
             <Link className="text-link" to={item.to}>
               Learn more
             </Link>

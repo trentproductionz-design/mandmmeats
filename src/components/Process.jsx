@@ -3,7 +3,10 @@ const processSteps = [
     title: 'Call to get on the schedule',
     copy:
       'Give us a call to discuss what you need and get on the schedule. We will walk you through timing, availability, and what to expect. Whether it is a whole beef, a half hog, or a deer during rifle season, we will find a time that works.',
-    detail: 'Phone: (989) 906-1617',
+    detail: [
+      'Custom processing: (989) 386-0166',
+      'Deer processing: (989) 906-1617',
+    ],
   },
   {
     title: 'Drop off and review your cut sheet',
@@ -32,7 +35,15 @@ export default function Process() {
           <article key={step.title} className="process-card">
             <h3>{step.title}</h3>
             <p>{step.copy}</p>
-            <span className="process-detail">{step.detail}</span>
+            {Array.isArray(step.detail) ? (
+              <div className="process-detail">
+                {step.detail.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+              </div>
+            ) : (
+              <span className="process-detail">{step.detail}</span>
+            )}
           </article>,
           index < processSteps.length - 1 ? (
             <div key={`${step.title}-arrow`} className="process-arrow" aria-hidden="true">

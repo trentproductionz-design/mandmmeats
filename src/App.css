@@ -450,17 +450,19 @@
 .marquee-inner {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem clamp(2.5rem, 6vw, 5rem);
+  gap: 1rem clamp(1.5rem, 3vw, 2.5rem);
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .marquee-inner span {
+  flex: 1 1 0;
   color: rgba(255, 250, 244, 0.88);
   font-size: 0.86rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 /* ── Content sections ────────────────────────────────── */
@@ -883,6 +885,7 @@
 
 .process-card h3 {
   margin-bottom: 0.8rem;
+  min-height: 4.3rem;
 }
 
 .process-card p {
@@ -905,7 +908,9 @@
 .process-detail {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: 0.3rem;
+  min-height: 3.6rem;
   margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid rgba(31, 23, 20, 0.08);
@@ -946,7 +951,8 @@
 }
 
 .testimonials-row-right .testimonials-track {
-  animation-name: testimonials-scroll-right;
+  animation-name: testimonials-scroll-left;
+  animation-direction: reverse;
 }
 
 @keyframes testimonials-scroll-left {
@@ -973,14 +979,20 @@
   align-content: start;
   gap: 0.7rem;
   padding: 1.65rem 1.85rem;
-  border: 1px solid rgba(31, 23, 20, 0.1);
+  border: 1px solid rgba(255, 250, 244, 0.12);
   border-radius: var(--card-radius-md);
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.82), rgba(246, 238, 229, 0.78));
-  box-shadow: var(--card-shadow-soft);
+  background: linear-gradient(
+    180deg,
+    rgba(111, 45, 39, 0.96),
+    rgba(95, 36, 31, 0.98)
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 250, 244, 0.04),
+    0 20px 36px rgba(60, 20, 16, 0.22);
 }
 
 .testimonial-stars {
-  color: rgba(31, 23, 20, 0.88);
+  color: rgba(255, 236, 205, 0.92);
   font-size: 0.95rem;
   letter-spacing: 0.18em;
   line-height: 1;
@@ -988,7 +1000,7 @@
 
 .testimonial-quote {
   margin: 0;
-  color: var(--ink);
+  color: rgba(255, 250, 244, 0.94);
   font-size: 1rem;
   line-height: 1.55;
   display: -webkit-box;
@@ -999,7 +1011,7 @@
 
 .testimonial-name {
   margin: 0;
-  color: rgba(31, 23, 20, 0.64);
+  color: rgba(255, 232, 214, 0.72);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -1046,14 +1058,18 @@
   width: 100%;
 }
 
+.cuts-mobile-nav {
+  display: none;
+}
+
 .cuts-visual-stage {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(20rem, 24rem) minmax(40rem, 1fr) minmax(20rem, 24rem);
+  grid-template-columns: minmax(18rem, 21rem) minmax(34rem, 1fr) minmax(18rem, 21rem);
   align-items: center;
-  gap: clamp(5rem, 8vw, 10rem);
+  gap: clamp(4.5rem, 7vw, 8.5rem);
   padding-inline: clamp(1rem, 3vw, 3rem);
-  min-height: clamp(30rem, 46vw, 48rem);
+  min-height: clamp(27rem, 41vw, 42rem);
   overflow: visible;
 }
 
@@ -1077,32 +1093,32 @@
 
 .cuts-stage-card-left {
   justify-self: start;
-  width: min(100%, 24rem);
-  transform: translateX(3rem) scale(1);
+  width: min(100%, 21rem);
+  transform: translateX(-0.5rem) scale(1);
 }
 
 .cuts-stage-card-right {
   justify-self: end;
-  width: min(100%, 24rem);
-  transform: translateX(-3rem) scale(1);
+  width: min(100%, 21rem);
+  transform: translateX(-1.75rem) scale(1);
 }
 
 .cuts-stage-card-active {
   z-index: 2;
   transform: translateY(0) scale(1);
-  width: min(100%, 52rem);
+  width: min(100%, 46rem);
   justify-self: center;
 }
 
 
 .cuts-stage-card-left:hover,
 .cuts-stage-card-left:focus-visible {
-  transform: translateX(3rem) scale(1.02);
+  transform: translateX(-0.5rem) scale(1.02);
 }
 
 .cuts-stage-card-right:hover,
 .cuts-stage-card-right:focus-visible {
-  transform: translateX(-3rem) scale(1.02);
+  transform: translateX(-1.75rem) scale(1.02);
 }
 
 .cuts-stage-label {
@@ -1154,8 +1170,20 @@
 }
 
 .cuts-stage-card-active .cuts-stage-image {
-  width: min(100%, 60rem);
-  max-width: 60rem;
+  width: min(100%, 53rem);
+  max-width: 53rem;
+}
+
+.cuts-stage-card-active.cuts-stage-card-cattle .cuts-stage-image {
+  transform: translateX(-2.75rem);
+}
+
+.cuts-stage-card-active.cuts-stage-card-pork .cuts-stage-image {
+  transform: translateX(-1.1rem);
+}
+
+.cuts-stage-card-active.cuts-stage-card-lamb .cuts-stage-image {
+  transform: translateX(-1.35rem);
 }
 
 .cuts-stage-card:not(.cuts-stage-card-active):hover .cuts-stage-hint,
@@ -1704,9 +1732,19 @@
   }
 
   .cuts-stage-card-active .cuts-stage-image {
+    transform: none;
     width: 100%;
     max-width: 100%;
     max-height: 38vh;
+  }
+
+  .cuts-stage-card-left .cuts-stage-image,
+  .cuts-stage-card-right .cuts-stage-image {
+    transform: none;
+  }
+
+  .cuts-guide-details {
+    gap: 1rem;
   }
 
   .process-row {
@@ -1786,6 +1824,113 @@
 }
 
 @media (max-width: 720px) {
+  .cuts-guide-shell {
+    gap: 1.25rem;
+  }
+
+  .cuts-mobile-nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .cuts-mobile-chip {
+    min-height: 2.9rem;
+    padding: 0 0.9rem;
+    border: 1px solid rgba(31, 23, 20, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 250, 244, 0.82);
+    color: rgba(31, 23, 20, 0.72);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .cuts-mobile-chip.is-active {
+    border-color: rgba(111, 45, 39, 0.28);
+    background: rgba(111, 45, 39, 0.08);
+    color: var(--accent);
+    box-shadow: 0 10px 24px rgba(31, 23, 20, 0.08);
+  }
+
+  .cuts-visual-stage {
+    display: block;
+    padding-inline: 0;
+    overflow: visible;
+    min-height: auto;
+  }
+
+  .cuts-stage-card-left,
+  .cuts-stage-card-right {
+    display: none;
+  }
+
+  .cuts-stage-card-active {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    gap: 0.7rem;
+  }
+
+  .cuts-stage-card-active .cuts-stage-label {
+    font-size: 0.72rem;
+  }
+
+  .cuts-stage-card-active .cuts-stage-label strong {
+    font-size: clamp(1.3rem, 5.5vw, 1.75rem);
+  }
+
+  .cuts-stage-card-active .cuts-stage-image {
+    width: calc(100% - 1rem);
+    max-width: 100%;
+    max-height: none;
+    margin-inline: auto;
+    transform: translateX(0.6rem);
+  }
+
+  .cuts-stage-card-active.cuts-stage-card-cattle .cuts-stage-image {
+    transform: translateX(0.15rem);
+  }
+
+  .cuts-stage-card-active.cuts-stage-card-pork .cuts-stage-image {
+    transform: translateX(0.55rem);
+  }
+
+  .cuts-stage-card-active.cuts-stage-card-lamb .cuts-stage-image {
+    transform: translateX(0.75rem);
+  }
+
+  .cuts-guide-heading h3 {
+    font-size: clamp(1.45rem, 6vw, 1.85rem);
+    text-align: center;
+  }
+
+  .cuts-copy {
+    width: 100%;
+    gap: 0.9rem;
+  }
+
+  .cuts-copy-card {
+    padding: 1rem 1rem 1.05rem;
+  }
+
+  .cuts-copy-meta {
+    gap: 0.5rem;
+  }
+
+  .cuts-index {
+    grid-template-columns: 1fr;
+  }
+
   .hero-section {
     padding-top: 1rem;
   }
@@ -1963,12 +2108,26 @@
 
   .testimonials-track {
     gap: 0.5rem;
+    width: max-content;
     animation-duration: 90s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    padding-inline: 0.1rem;
   }
 
   .testimonial-card {
     flex-basis: 78vw;
     padding: 1.15rem 1.3rem;
+  }
+
+  .testimonials-band {
+    gap: 0.85rem;
+  }
+
+  .testimonials-row {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-bottom: 0;
   }
 
   .footer-inner {
@@ -2609,22 +2768,165 @@
   font-weight: 700;
 }
 
+/* ===== Animal selector ===== */
+.cutsheet-selector-intro {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0 0 1.75rem;
+  max-width: 38rem;
+}
+
+.cutsheet-animal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.cutsheet-animal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 1.75rem 1.5rem;
+  background: var(--paper-strong);
+  border: 1px solid rgba(31, 23, 20, 0.1);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease,
+    transform 160ms ease;
+  box-shadow: 0 1px 0 rgba(31, 23, 20, 0.03),
+    0 12px 28px -20px rgba(31, 23, 20, 0.18);
+  font: inherit;
+  color: inherit;
+}
+
+.cutsheet-animal-card:not(.is-disabled):hover {
+  border-color: var(--accent);
+  box-shadow: 0 1px 0 rgba(31, 23, 20, 0.03),
+    0 20px 40px -20px rgba(111, 45, 39, 0.22);
+  transform: translateY(-2px);
+}
+
+.cutsheet-animal-card.is-disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.cutsheet-animal-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.cutsheet-animal-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.cutsheet-animal-cta {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cutsheet-animal-badge {
+  display: inline-block;
+  padding: 0.28rem 0.7rem;
+  border-radius: 2rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(31, 23, 20, 0.07);
+  color: var(--muted);
+}
+
+/* ===== Back link ===== */
+.cutsheet-back-link {
+  display: inline-block;
+  background: none;
+  border: 0;
+  padding: 0 0 1.25rem;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.cutsheet-back-link:hover,
+.cutsheet-back-link:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
+/* ===== Mobile stepper bar ===== */
+.cutsheet-stepper-mobile {
+  display: none;
+}
+
+/* ===== Multi-column radio grids ===== */
+.cutsheet-options--cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cutsheet-options--cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cutsheet-options--cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 @media (max-width: 720px) {
   .cutsheet-section {
     padding-top: 2.5rem;
     padding-bottom: 3rem;
   }
+
+  /* Hide desktop stepper, show mobile progress bar */
   .cutsheet-stepper {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.4rem;
-    margin-bottom: 1.75rem;
-  }
-  .cutsheet-step-label {
     display: none;
   }
-  .cutsheet-step {
-    padding-bottom: 0.75rem;
+  .cutsheet-stepper-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.75rem;
   }
+  .cutsheet-stepper-mobile-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-soft);
+  }
+  .cutsheet-stepper-mobile-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(31, 23, 20, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .cutsheet-stepper-mobile-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 300ms ease;
+  }
+
   .cutsheet-fieldset {
     gap: 1.25rem;
   }
@@ -2644,13 +2946,47 @@
     order: 1;
     text-align: center;
   }
+
+  /* Collapse 3-4 col grids to 2 on tablet */
+  .cutsheet-options--cols-3,
+  .cutsheet-options--cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Animal selector stacks vertically on mobile */
+  .cutsheet-animal-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .cutsheet-animal-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+  .cutsheet-animal-card .cutsheet-animal-desc {
+    display: none;
+  }
+  .cutsheet-animal-name {
+    font-size: 1.15rem;
+    margin-bottom: 0.2rem;
+  }
 }
 
 @media (max-width: 540px) {
   .cutsheet-form {
-    padding: 1.4rem 1.15rem 1.6rem;
+    padding: 1.4rem 1rem 1.6rem;
   }
   .cutsheet-fieldset legend {
     font-size: 1.35rem;
+  }
+
+  /* Collapse 2-col grids to 1 col on small phones */
+  .cutsheet-options--cols-2 {
+    grid-template-columns: 1fr;
+  }
+  .cutsheet-options--cols-3,
+  .cutsheet-options--cols-4 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
