@@ -12,12 +12,12 @@ const pricing = [
     kicker: 'Whole, half, or quarter',
     rows: [
       { label: 'Slaughter fee', value: '$120' },
-      { label: 'Processing', value: '$0.75 / lb' },
+      { label: 'Processing', value: '$0.80 / lb' },
       { label: 'Processing by the 1/4', value: '$15 Surcharge' },
       { label: 'Beef patties', value: '$0.75 / lb' },
     ],
     note:
-      'Hanging weight pricing. Cut sheet reviewed in person so you get exactly what you want back.',
+      'Hanging weight pricing. Beef patties needing to be vaccum sealed are an additional $0.75 / lb. Cut sheet reviewed in person so you get exactly what you want back.',
   },
   {
     title: 'Pork',
@@ -39,7 +39,7 @@ const pricing = [
       { label: 'Slaughter & processing', value: '$150' },
     ],
     note:
-      'Straightforward flat pricing for whole lamb, slaughter through packaged cuts.',
+      'Straightforward pricing for pricing and slaughter.',
   },
 ]
 
