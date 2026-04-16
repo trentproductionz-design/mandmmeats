@@ -380,7 +380,7 @@ export default function BeefCutSheet({ onBack }) {
 
               <Field
                 label="Number of steaks per package"
-                help="Choosing 1/package will add a $10 fee to processing."
+                help="Choosing 1/package will add a $5 fee to processing."
                 required
                 error={errors.steaksPerPackage}
               >
@@ -388,7 +388,7 @@ export default function BeefCutSheet({ onBack }) {
                   value={form.steaksPerPackage}
                   onChange={update('steaksPerPackage')}
                 >
-                  <option value="1/package">1 / package (+$10 fee)</option>
+                  <option value="1/package">1 / package (+$5 fee)</option>
                   <option value="2/package">2 / package</option>
                 </select>
               </Field>
