@@ -1,0 +1,9 @@
+<svg width="600" height="500" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@700&family=DM+Sans:wght@400&display=swap');
+  </style>
+  <text x="300" y="180" text-anchor="middle" font-family="'Cormorant', serif" font-size="180" font-weight="700" letter-spacing="4" fill="#1a3c2a">G</text>
+  <text x="300" y="310" text-anchor="middle" font-family="'Cormorant', serif" font-size="180" font-weight="700" letter-spacing="4" fill="#1a3c2a" opacity="0.25">W</text>
+  <line x1="216" y1="348" x2="384" y2="348" stroke="#1a3c2a" stroke-width="0.5"/>
+  <text x="300" y="382" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="18" font-weight="400" letter-spacing="16" fill="#1a3c2a">COLLECTIVE</text>
+</svg>
