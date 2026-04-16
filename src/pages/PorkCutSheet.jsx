@@ -209,7 +209,7 @@ export default function PorkCutSheet({ onBack }) {
         body: JSON.stringify(payload),
       })
       const sheetsPromise = SHEETS_ENDPOINT
-        ? fetch(SHEETS_ENDPOINT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {})
+        ? fetch(`${SHEETS_ENDPOINT}?data=${encodeURIComponent(JSON.stringify(payload))}`, { mode: 'no-cors' }).catch(() => {})
         : Promise.resolve()
 
       const [response] = await Promise.all([formspreePromise, sheetsPromise])

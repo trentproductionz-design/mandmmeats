@@ -27,9 +27,12 @@
 // ── Spreadsheet ID (from the URL of your Google Sheet) ───────────────────────
 var SPREADSHEET_ID = '13VmPh57SttPcSvugKIh9gtetEZqEgKULo2hT9j_H_h0'
 
-function doPost(e) {
+function doGet(e) {
   try {
-    var data = JSON.parse(e.postData.contents)
+    if (!e || !e.parameter || !e.parameter.data) {
+      return ContentService.createTextOutput('No data received').setMimeType(ContentService.MimeType.TEXT)
+    }
+    var data = JSON.parse(e.parameter.data)
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID)
     var now = Utilities.formatDate(
       new Date(),
