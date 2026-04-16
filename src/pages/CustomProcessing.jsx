@@ -11,9 +11,9 @@ const pricing = [
     title: 'Beef',
     kicker: 'Whole, half, or quarter',
     rows: [
-      { label: 'Slaughter fee', value: '$100' },
+      { label: 'Slaughter fee', value: '$120' },
       { label: 'Processing', value: '$0.75 / lb' },
-      { label: 'Processing by the 1/4', value: '$0.78 / lb' },
+      { label: 'Processing by the 1/4', value: '$15 Surcharge' },
       { label: 'Beef patties', value: '$0.50 / lb' },
     ],
     note:
