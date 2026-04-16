@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CUSTOM, SHEETS_ENDPOINT } from '../data/locations'
 
 const initialForm = {
   customerName: '',
@@ -125,28 +126,31 @@ export default function LambCutSheet({ onBack }) {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          formType: 'Lamb Cut Sheet',
-          customerName: form.customerName,
-          customerPhone: form.customerPhone,
-          farmerName: form.farmerName,
-          loin: form.loin,
-          shoulder: form.shoulder,
-          leg: form.leg,
-          ribs: form.ribs,
-          stewMeat: form.stewMeat,
-          lambShanks: form.lambShanks,
-          groundLamb: form.groundLamb,
-          _subject: `Lamb Cut Sheet - ${form.customerName || 'Customer'}`,
-        }),
-      })
+      const payload = {
+        formType: 'Lamb Cut Sheet',
+        customerName: form.customerName,
+        customerPhone: form.customerPhone,
+        farmerName: form.farmerName,
+        loin: form.loin,
+        shoulder: form.shoulder,
+        leg: form.leg,
+        ribs: form.ribs,
+        stewMeat: form.stewMeat,
+        lambShanks: form.lambShanks,
+        groundLamb: form.groundLamb,
+        _subject: `Lamb Cut Sheet - ${form.customerName || 'Customer'}`,
+      }
 
+      const formspreePromise = fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const sheetsPromise = SHEETS_ENDPOINT
+        ? fetch(SHEETS_ENDPOINT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {})
+        : Promise.resolve()
+
+      const [response] = await Promise.all([formspreePromise, sheetsPromise])
       if (!response.ok) throw new Error('Submission failed')
 
       setSubmitted(true)
@@ -155,7 +159,7 @@ export default function LambCutSheet({ onBack }) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch {
       setSubmitError(
-        'We could not send your cut sheet right now. Please try again in a moment or call us at (989) 906-1617.',
+        `We could not send your cut sheet right now. Please try again in a moment or call us at ${CUSTOM.phoneDisplay}.`,
       )
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } finally {
@@ -205,7 +209,7 @@ export default function LambCutSheet({ onBack }) {
           <p>
             Your completed lamb cut sheet has been sent successfully. We will
             review it before drop-off. If you need to make a change, call us at{' '}
-            <a href="tel:9899061617">(989) 906-1617</a>.
+            <a href={`tel:${CUSTOM.phone}`}>{CUSTOM.phoneDisplay}</a>.
           </p>
         </div>
       ) : (

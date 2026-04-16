@@ -1,0 +1,211 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// M&M Meat Processing — Cut Sheet → Google Sheets
+//
+// SETUP INSTRUCTIONS (one-time, ~10 minutes)
+// ─────────────────────────────────────────────────────────────────────────────
+// 1. Open the Google Sheet where you want orders tracked.
+// 2. Click Extensions → Apps Script.
+// 3. Delete any existing code in the editor.
+// 4. Paste this entire file and click Save (disk icon).
+// 5. Click Deploy → New deployment.
+//    - Type: Web app
+//    - Execute as: Me
+//    - Who has access: Anyone
+// 6. Click Deploy. Google will ask you to authorize — click through.
+// 7. Copy the Web app URL it gives you (looks like
+//    https://script.google.com/macros/s/ABC123.../exec)
+// 8. Send that URL to your developer. They paste it into the website and
+//    cut sheet submissions will start appearing in your sheet automatically.
+//
+// RESULT
+// ─────────────────────────────────────────────────────────────────────────────
+// Each form type gets its own tab: "Beef", "Pork", "Lamb".
+// Headers are created automatically on the first submission.
+// Timestamps use Eastern time (America/Detroit).
+// ─────────────────────────────────────────────────────────────────────────────
+
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents)
+    var ss = SpreadsheetApp.getActiveSpreadsheet()
+    var now = Utilities.formatDate(
+      new Date(),
+      'America/Detroit',
+      'MM/dd/yyyy HH:mm:ss'
+    )
+
+    if (data.formType === 'Beef Cut Sheet') {
+      appendBeef(ss, data, now)
+    } else if (data.formType === 'Pork Cut Sheet') {
+      appendPork(ss, data, now)
+    } else if (data.formType === 'Lamb Cut Sheet') {
+      appendLamb(ss, data, now)
+    }
+
+    return ContentService.createTextOutput('OK').setMimeType(
+      ContentService.MimeType.TEXT
+    )
+  } catch (err) {
+    Logger.log(err)
+    return ContentService.createTextOutput('Error: ' + err.toString()).setMimeType(
+      ContentService.MimeType.TEXT
+    )
+  }
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function getOrCreateSheet(ss, name, headers) {
+  var sheet = ss.getSheetByName(name)
+  if (!sheet) {
+    sheet = ss.insertSheet(name)
+    sheet.appendRow(headers)
+    var headerRange = sheet.getRange(1, 1, 1, headers.length)
+    headerRange.setFontWeight('bold')
+    headerRange.setBackground('#2d1a16')
+    headerRange.setFontColor('#ffffff')
+    sheet.setFrozenRows(1)
+    sheet.setColumnWidth(1, 160) // Submitted column
+  }
+  return sheet
+}
+
+// ── Beef ─────────────────────────────────────────────────────────────────────
+
+function appendBeef(ss, d, now) {
+  var headers = [
+    'Submitted',
+    'Customer Name',
+    'Phone',
+    'Farmer',
+    'Beef Size',
+    'Steaks / Package',
+    'Steak Thickness',
+    'Roast Size',
+    'Ribeyes',
+    'Loin',
+    'Roasts',
+    'Sirloin',
+    'Sirloin Tip',
+    'Round Steak',
+    'Round Cubed',
+    'Short Ribs',
+    'Stew Meat',
+    'Flank',
+    'Tri Tip',
+    'Brisket',
+    'Soup Bones',
+    'Burger',
+    'Patties',
+    'Patties (notes)',
+    'Organs',
+    'Special Instructions',
+  ]
+  var sheet = getOrCreateSheet(ss, 'Beef', headers)
+  sheet.appendRow([
+    now,
+    d.customerName,
+    d.customerPhone,
+    d.farmerName,
+    d.beefSize,
+    d.steaksPerPackage,
+    d.steakThickness,
+    d.roastSize,
+    d.ribeyes,
+    d.loin,
+    d.roasts,
+    d.sirloin,
+    d.sirloinTip,
+    d.roundSteak,
+    d.roundCubed,
+    d.shortRibs,
+    d.stewMeat,
+    d.flank,
+    d.triTip,
+    d.brisket,
+    d.soupBones,
+    d.burger,
+    d.patties,
+    d.pattiesOther,
+    d.organs,
+    d.specialInstructions,
+  ])
+}
+
+// ── Pork ─────────────────────────────────────────────────────────────────────
+
+function appendPork(ss, d, now) {
+  var headers = [
+    'Submitted',
+    'Customer Name',
+    'Phone',
+    'Farmer',
+    'Hog Size',
+    'Chops / Package',
+    'Chop Thickness',
+    'Roasts',
+    'Loin',
+    'Shoulder',
+    'Ribs',
+    'Belly',
+    'Belly Thickness',
+    'Hams',
+    'Sausage Flavor',
+    'Spice Level',
+    'Brats',
+    'Sausage Links & Patties',
+  ]
+  var sheet = getOrCreateSheet(ss, 'Pork', headers)
+  sheet.appendRow([
+    now,
+    d.customerName,
+    d.customerPhone,
+    d.farmerName,
+    d.hogSize,
+    d.chopsPerPackage,
+    d.chopThickness,
+    d.roasts,
+    d.loin,
+    d.shoulder,
+    d.ribs,
+    d.belly,
+    d.bellyThickness,
+    d.hams,
+    d.sausageFlavor,
+    d.spiceLevel,
+    d.brats,
+    d.sausageLinks,
+  ])
+}
+
+// ── Lamb ─────────────────────────────────────────────────────────────────────
+
+function appendLamb(ss, d, now) {
+  var headers = [
+    'Submitted',
+    'Customer Name',
+    'Phone',
+    'Farmer',
+    'Loin',
+    'Shoulder',
+    'Leg',
+    'Ribs',
+    'Stew Meat',
+    'Lamb Shanks',
+    'Ground Lamb',
+  ]
+  var sheet = getOrCreateSheet(ss, 'Lamb', headers)
+  sheet.appendRow([
+    now,
+    d.customerName,
+    d.customerPhone,
+    d.farmerName,
+    d.loin,
+    d.shoulder,
+    d.leg,
+    d.ribs,
+    d.stewMeat,
+    d.lambShanks,
+    d.groundLamb,
+  ])
+}

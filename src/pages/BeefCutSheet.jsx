@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CUSTOM, SHEETS_ENDPOINT } from '../data/locations'
 
 const initialForm = {
   customerName: '',
@@ -191,43 +192,47 @@ export default function BeefCutSheet({ onBack }) {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          formType: 'Beef Cut Sheet',
-          customerName: form.customerName,
-          customerPhone: form.customerPhone,
-          farmerName: form.farmerName,
-          beefSize: form.beefSize,
-          steaksPerPackage: form.steaksPerPackage,
-          steakThickness: form.steakThickness,
-          roastSize: form.roastSize,
-          ribeyes: form.ribeyes,
-          loin: form.loin,
-          roasts: form.roasts,
-          sirloin: form.sirloin,
-          sirloinTip: form.sirloinTip,
-          roundSteak: form.roundSteak,
-          roundCubed: form.roundCubed,
-          shortRibs: form.shortRibs,
-          stewMeat: form.stewMeat,
-          flank: form.flank,
-          triTip: form.triTip,
-          brisket: form.brisket,
-          soupBones: form.soupBones,
-          burger: form.burger,
-          patties: form.patties,
-          pattiesOther: form.pattiesOther || '(none)',
-          organs: form.organs.join(', '),
-          specialInstructions: form.specialInstructions || '(none)',
-          _subject: `Beef Cut Sheet - ${form.customerName || 'Customer'}`,
-        }),
-      })
+      const payload = {
+        formType: 'Beef Cut Sheet',
+        customerName: form.customerName,
+        customerPhone: form.customerPhone,
+        farmerName: form.farmerName,
+        beefSize: form.beefSize,
+        steaksPerPackage: form.steaksPerPackage,
+        steakThickness: form.steakThickness,
+        roastSize: form.roastSize,
+        ribeyes: form.ribeyes,
+        loin: form.loin,
+        roasts: form.roasts,
+        sirloin: form.sirloin,
+        sirloinTip: form.sirloinTip,
+        roundSteak: form.roundSteak,
+        roundCubed: form.roundCubed,
+        shortRibs: form.shortRibs,
+        stewMeat: form.stewMeat,
+        flank: form.flank,
+        triTip: form.triTip,
+        brisket: form.brisket,
+        soupBones: form.soupBones,
+        burger: form.burger,
+        patties: form.patties,
+        pattiesOther: form.pattiesOther || '(none)',
+        organs: form.organs.join(', '),
+        specialInstructions: form.specialInstructions || '(none)',
+        _subject: `Beef Cut Sheet - ${form.customerName || 'Customer'}`,
+      }
 
+      // Fire Formspree (email) and Google Sheets in parallel
+      const formspreePromise = fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const sheetsPromise = SHEETS_ENDPOINT
+        ? fetch(SHEETS_ENDPOINT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {})
+        : Promise.resolve()
+
+      const [response] = await Promise.all([formspreePromise, sheetsPromise])
       if (!response.ok) throw new Error('Submission failed')
 
       setSubmitted(true)
@@ -236,7 +241,7 @@ export default function BeefCutSheet({ onBack }) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch {
       setSubmitError(
-        'We could not send your cut sheet right now. Please try again in a moment or call us at (989) 906-1617.',
+        `We could not send your cut sheet right now. Please try again in a moment or call us at ${CUSTOM.phoneDisplay}.`,
       )
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } finally {
@@ -290,7 +295,7 @@ export default function BeefCutSheet({ onBack }) {
           <p>
             Your completed cut sheet has been sent successfully. We will review
             it before drop-off. If you need to make a change, call us at{' '}
-            <a href="tel:9899061617">(989) 906-1617</a>.
+            <a href={`tel:${CUSTOM.phone}`}>{CUSTOM.phoneDisplay}</a>.
           </p>
         </div>
       ) : (

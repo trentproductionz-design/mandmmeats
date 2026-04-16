@@ -1014,6 +1014,10 @@
 .testimonials-row-right .testimonials-track {
   animation-name: testimonials-scroll-left;
   animation-direction: reverse;
+  /* Start at the end of the reversed animation so content is visible immediately.
+     Without this, the reversed row starts at translateX(-50%) and takes a long
+     time to scroll into view on load. */
+  animation-delay: -120s;
 }
 
 @keyframes testimonials-scroll-left {
@@ -2227,10 +2231,14 @@
   .testimonials-track {
     gap: 0.5rem;
     width: max-content;
-    animation-duration: 90s;
+    animation-duration: 200s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     padding-inline: 0.1rem;
+  }
+
+  .testimonials-row-right .testimonials-track {
+    animation-delay: -200s;
   }
 
   .testimonial-card {

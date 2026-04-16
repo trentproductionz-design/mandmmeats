@@ -11,6 +11,10 @@ export const VENISON = {
     'https://www.google.com/maps?q=11285+Schoolcrest+Avenue+Clare+MI+48617&output=embed',
 }
 
+// Paste the Google Apps Script web app URL here after deployment.
+// Leave as empty string until ready — forms will still submit via Formspree.
+export const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyY3aIgMBlyDa9J4vr1fRrQJwijExJ2fllxygkM2HLugdDW2XiomiqN-up1AYBVR97/exec'
+
 export const CUSTOM = {
   label: 'Beef, Pork & Lamb Processing',
   phone: '9893860166',
