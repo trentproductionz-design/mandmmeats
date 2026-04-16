@@ -89,10 +89,12 @@
 
 .brand-logo {
   display: block;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 5rem;
+  height: 5rem;
   flex-shrink: 0;
   object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
   object-fit: contain;
   padding: 0.25rem;
   border: 1px solid rgba(111, 45, 39, 0.1);
@@ -2217,8 +2219,8 @@
   }
 
   .brand-logo {
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
   }
 
   .hero-text {
