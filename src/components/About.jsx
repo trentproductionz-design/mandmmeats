@@ -41,7 +41,7 @@ export default function About() {
 
           <div className="about-image">
             <img
-              src="/img-blog-Ramaders-3.jpg"
+              src="/Screenshot 2026-04-16 161714.png"
               alt="M&M Meat Processing"
               className="about-photo"
             />

@@ -14,7 +14,7 @@ const pricing = [
       { label: 'Slaughter fee', value: '$120' },
       { label: 'Processing', value: '$0.75 / lb' },
       { label: 'Processing by the 1/4', value: '$15 Surcharge' },
-      { label: 'Beef patties', value: '$0.50 / lb' },
+      { label: 'Beef patties', value: '$0.75 / lb' },
     ],
     note:
       'Hanging weight pricing. Cut sheet reviewed in person so you get exactly what you want back.',
@@ -23,9 +23,8 @@ const pricing = [
     title: 'Pork',
     kicker: 'Whole or half hog',
     rows: [
-      { label: 'Slaughter', value: '$75' },
-      { label: 'Slaughter (shot in field)', value: '$100' },
-      { label: 'Processing', value: '$0.75 / lb' },
+      { label: 'Slaughter', value: '$80' },
+      { label: 'Processing', value: '$0.80 / lb' },
       { label: 'Smoked hams', value: '$24 / side' },
       { label: 'Smoked bacon', value: '$20 / side' },
       { label: 'Smoked cottage bacon', value: '$16 / side' },
