@@ -11,7 +11,7 @@ const initialForm = {
   roastSize: '',
   ribeyes: '',
   loin: '',
-  roasts: '',
+  roasts: [],
   sirloin: '',
   sirloinTip: '',
   roundSteak: '',
@@ -69,7 +69,6 @@ function validateStep(step, form) {
     const cutFields = [
       ['ribeyes', 'Ribeyes'],
       ['loin', 'Loin'],
-      ['roasts', 'Roasts'],
       ['sirloin', 'Sirloin'],
       ['sirloinTip', 'Sirloin Tip'],
       ['roundSteak', 'Round Steak'],
@@ -85,6 +84,7 @@ function validateStep(step, form) {
     cutFields.forEach(([key, label]) => {
       if (!form[key]) errors[key] = `Please choose an option for ${label}.`
     })
+    if (!form.roasts.length) errors.roasts = 'Please choose at least one option for Roasts.'
   }
   if (step === 3) {
     if (!form.patties) errors.patties = 'Please choose a patties option.'
@@ -106,6 +106,25 @@ export default function BeefCutSheet({ onBack }) {
 
   const update = (field) => (e) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }))
+    if (errors[field]) {
+      setErrors((prev) => {
+        const next = { ...prev }
+        delete next[field]
+        return next
+      })
+    }
+  }
+
+  const toggleMulti = (field) => (value) => {
+    setForm((prev) => {
+      const current = prev[field]
+      return {
+        ...prev,
+        [field]: current.includes(value)
+          ? current.filter((v) => v !== value)
+          : [...current, value],
+      }
+    })
     if (errors[field]) {
       setErrors((prev) => {
         const next = { ...prev }
@@ -203,7 +222,7 @@ export default function BeefCutSheet({ onBack }) {
         roastSize: form.roastSize,
         ribeyes: form.ribeyes,
         loin: form.loin,
-        roasts: form.roasts,
+        roasts: form.roasts.join(', '),
         sirloin: form.sirloin,
         sirloinTip: form.sirloinTip,
         roundSteak: form.roundSteak,
@@ -473,11 +492,10 @@ export default function BeefCutSheet({ onBack }) {
                 error={errors.loin}
               />
 
-              <RadioGroup
+              <CheckboxGroup
                 label="Roasts"
                 required
-                name="roasts"
-                help="Roasts that are not selected will be ground into your burger."
+                help="Select all that apply. Roasts not selected will be ground into your burger."
                 options={[
                   'Chuck Roast',
                   'English Roast',
@@ -485,7 +503,7 @@ export default function BeefCutSheet({ onBack }) {
                   'Grind all into burger',
                 ]}
                 value={form.roasts}
-                onChange={update('roasts')}
+                onChange={toggleMulti('roasts')}
                 error={errors.roasts}
               />
 
@@ -785,6 +803,33 @@ function RadioGroup({ label, name, options, value, onChange, required, help, err
               value={opt}
               checked={value === opt}
               onChange={onChange}
+            />
+            <span>{opt}</span>
+          </label>
+        ))}
+      </div>
+      {error && <span className="cutsheet-error">{error}</span>}
+    </div>
+  )
+}
+
+function CheckboxGroup({ label, options, value, onChange, required, help, error }) {
+  return (
+    <div className={`cutsheet-field ${error ? 'has-error' : ''}`}>
+      <span className="cutsheet-label">
+        {label}
+        {required && (
+          <span className="cutsheet-required" aria-hidden="true"> *</span>
+        )}
+      </span>
+      {help && <span className="cutsheet-help">{help}</span>}
+      <div className="cutsheet-options">
+        {options.map((opt) => (
+          <label key={opt} className="cutsheet-check">
+            <input
+              type="checkbox"
+              checked={value.includes(opt)}
+              onChange={() => onChange(opt)}
             />
             <span>{opt}</span>
           </label>

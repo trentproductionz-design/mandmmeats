@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 import { VENISON, CUSTOM } from '../data/locations'
 
 const hours = [
-  { day: 'Monday', time: '8:00 AM – 5:00 PM' },
-  { day: 'Tuesday', time: '8:00 AM – 5:00 PM' },
-  { day: 'Wednesday', time: '8:00 AM – 5:00 PM' },
-  { day: 'Thursday', time: '8:00 AM – 5:00 PM' },
-  { day: 'Friday', time: '8:00 AM – 5:00 PM' },
+  { day: 'Monday', time: '9:00 AM – 5:00 PM' },
+  { day: 'Tuesday', time: '9:00 AM – 5:00 PM' },
+  { day: 'Wednesday', time: '9:00 AM – 5:00 PM' },
+  { day: 'Thursday', time: '9:00 AM – 5:00 PM' },
+  { day: 'Friday', time: '9:00 AM – 5:00 PM' },
   { day: 'Saturday', time: 'By Appointment' },
   { day: 'Sunday', time: 'Closed' },
 ]

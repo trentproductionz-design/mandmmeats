@@ -17,7 +17,7 @@ const pricing = [
       { label: 'Beef patties', value: '$0.75 / lb' },
     ],
     note:
-      'Hanging weight pricing. Beef patties needing to be vaccum sealed are an additional $0.75 / lb. Cut sheet reviewed in person so you get exactly what you want back.',
+      'Hanging weight pricing. Bulk burger needing vaccum sealed is an additional $0.75 / lb. Cut sheets reviewed in-person, over the phone, or online so there\'s no surprises.',
   },
   {
     title: 'Pork',
