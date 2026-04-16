@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="footer-inner">
         <div className="footer-brand">
           <Link className="brand-mark" to="/">
-            <img className="brand-logo" src="/mm-logo.svg" alt="M&M Meat Processing logo" />
+            <img className="brand-logo" src="/logo.png" alt="M&M Meat Processing logo" />
             <span className="brand-copy">
               <strong>M&M Meat Processing</strong>
               <small>Clare, Michigan</small>

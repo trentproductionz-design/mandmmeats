@@ -44,7 +44,7 @@ export default function Navbar() {
   return (
     <header className="topbar">
       <NavLink className="brand-mark" to="/" end onClick={closeMenu}>
-        <img className="brand-logo" src="/mm-logo.svg" alt="M&M Meat Processing logo" />
+        <img className="brand-logo" src="/logo.png" alt="M&M Meat Processing logo" />
         <span className="brand-copy">
           <strong>M&M Meat Processing</strong>
           <small>Clare, Michigan</small>
