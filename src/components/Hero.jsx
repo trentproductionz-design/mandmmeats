@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { VENISON, CUSTOM } from '../data/locations'
 
 export default function Hero() {
@@ -19,9 +20,12 @@ export default function Hero() {
         </p>
 
         <div className="hero-actions">
-          <a className="button button-primary" href="#services">
+          <a className="button button-accent" href="#services">
             Explore services
           </a>
+          <Link className="button button-accent" to="/cut-sheets">
+            Cut sheets
+          </Link>
           <a className="button button-secondary" href="#contact">
             Contact M&M
           </a>

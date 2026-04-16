@@ -34,6 +34,7 @@ export default function Services() {
             {item.detail ? <p>{item.detail}</p> : null}
             <Link className="text-link" to={item.to}>
               Learn more
+              <img src="/pngegg.png" alt="" className="text-link-arrow" aria-hidden="true" />
             </Link>
           </article>
         ))}

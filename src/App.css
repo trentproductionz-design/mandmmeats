@@ -286,9 +286,11 @@
   align-items: center;
   justify-content: center;
   min-height: 3.1rem;
-  padding: 0 1.25rem;
-  border-radius: 999px;
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
   font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
   text-decoration: none;
   transition:
     transform 180ms ease,
@@ -305,7 +307,22 @@
 .button-primary {
   color: var(--paper);
   background: var(--ink);
-  box-shadow: 0 18px 34px rgba(31, 23, 20, 0.18);
+  box-shadow: 0 8px 24px rgba(31, 23, 20, 0.22);
+}
+
+.button-primary:hover {
+  box-shadow: 0 12px 32px rgba(31, 23, 20, 0.28);
+}
+
+.button-accent {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow: 0 8px 24px rgba(111, 45, 39, 0.28);
+}
+
+.button-accent:hover {
+  background: #5c2420;
+  box-shadow: 0 12px 32px rgba(111, 45, 39, 0.36);
 }
 
 .button-secondary {
@@ -870,13 +887,16 @@
   transition: gap 200ms ease;
 }
 
-.text-link::after {
-  content: '\2192';
-  font-size: 1.1em;
+.text-link-arrow {
+  display: inline-block;
+  width: 1.21em;
+  height: 1.21em;
+  object-fit: contain;
   transition: transform 200ms ease;
+  filter: sepia(1) saturate(700%) hue-rotate(338deg) brightness(0.78);
 }
 
-.text-link:hover::after {
+.text-link:hover .text-link-arrow {
   transform: translateX(3px);
 }
 
@@ -2604,6 +2624,19 @@
 }
 
 @media (max-width: 540px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-top: 1.4rem;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    justify-content: center;
+    min-height: 3.4rem;
+  }
+
   .subpage-hero .hero-actions {
     flex-direction: column;
     align-items: stretch;
