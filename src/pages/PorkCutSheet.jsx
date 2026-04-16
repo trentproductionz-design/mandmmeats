@@ -19,6 +19,7 @@ const initialForm = {
   spiceLevel: '',
   brats: '',
   sausageLinks: '',
+  additionalNotes: '',
 }
 
 const STEPS = [
@@ -200,6 +201,7 @@ export default function PorkCutSheet({ onBack }) {
         spiceLevel: form.spiceLevel,
         brats: form.brats,
         sausageLinks: form.sausageLinks,
+        additionalNotes: form.additionalNotes || '(none)',
         _subject: `Pork Cut Sheet - ${form.customerName || 'Customer'}`,
       }
 
@@ -572,6 +574,15 @@ export default function PorkCutSheet({ onBack }) {
                 onChange={update('sausageLinks')}
                 error={errors.sausageLinks}
               />
+
+              <Field label="Additional Notes">
+                <textarea
+                  rows={5}
+                  value={form.additionalNotes}
+                  onChange={update('additionalNotes')}
+                  placeholder="Anything else we should know"
+                />
+              </Field>
             </fieldset>
           )}
 

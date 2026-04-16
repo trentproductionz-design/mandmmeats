@@ -146,7 +146,7 @@ function appendBeef(ss, d, now) {
     'Patties',
     'Patties (notes)',
     'Organs',
-    'Special Instructions',
+    'Additional Notes',
   ]
   var sheet = getOrCreateSheet(ss, 'Beef', headers)
   sheet.appendRow([
@@ -202,6 +202,7 @@ function appendPork(ss, d, now) {
     'Spice Level',
     'Brats',
     'Sausage Links & Patties',
+    'Additional Notes',
   ]
   var sheet = getOrCreateSheet(ss, 'Pork', headers)
   sheet.appendRow([
@@ -223,6 +224,7 @@ function appendPork(ss, d, now) {
     d.spiceLevel,
     d.brats,
     d.sausageLinks,
+    d.additionalNotes,
   ])
   formatRow(sheet, sheet.getLastRow(), headers.length)
 }
@@ -242,6 +244,7 @@ function appendLamb(ss, d, now) {
     'Stew Meat',
     'Lamb Shanks',
     'Ground Lamb',
+    'Additional Notes',
   ]
   var sheet = getOrCreateSheet(ss, 'Lamb', headers)
   sheet.appendRow([
@@ -256,6 +259,7 @@ function appendLamb(ss, d, now) {
     d.stewMeat,
     d.lambShanks,
     d.groundLamb,
+    d.additionalNotes,
   ])
   formatRow(sheet, sheet.getLastRow(), headers.length)
 }

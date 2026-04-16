@@ -12,6 +12,7 @@ const initialForm = {
   stewMeat: '',
   lambShanks: '',
   groundLamb: '',
+  additionalNotes: '',
 }
 
 const STEPS = [
@@ -138,6 +139,7 @@ export default function LambCutSheet({ onBack }) {
         stewMeat: form.stewMeat,
         lambShanks: form.lambShanks,
         groundLamb: form.groundLamb,
+        additionalNotes: form.additionalNotes || '(none)',
         _subject: `Lamb Cut Sheet - ${form.customerName || 'Customer'}`,
       }
 
@@ -373,6 +375,15 @@ export default function LambCutSheet({ onBack }) {
                 error={errors.groundLamb}
                 cols={3}
               />
+
+              <Field label="Additional Notes">
+                <textarea
+                  rows={5}
+                  value={form.additionalNotes}
+                  onChange={update('additionalNotes')}
+                  placeholder="Anything else we should know"
+                />
+              </Field>
             </fieldset>
           )}
 

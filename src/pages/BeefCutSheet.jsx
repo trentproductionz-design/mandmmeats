@@ -687,7 +687,7 @@ export default function BeefCutSheet({ onBack }) {
                 )}
               </div>
 
-              <Field label="Special Instructions">
+              <Field label="Additional Notes">
                 <textarea
                   rows={5}
                   value={form.specialInstructions}
