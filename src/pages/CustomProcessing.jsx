@@ -39,7 +39,7 @@ const pricing = [
       { label: 'Slaughter & processing', value: '$150' },
     ],
     note:
-      'Straightforward pricing for pricing and slaughter.',
+      'Straightforward pricing for slaughter and processing.',
   },
 ]
 
