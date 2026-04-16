@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CUSTOM, SHEETS_ENDPOINT } from '../data/locations'
+import { CUSTOM } from '../data/locations'
 
 const initialForm = {
   customerName: '',
@@ -208,9 +208,11 @@ export default function PorkCutSheet({ onBack }) {
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
-      const sheetsPromise = SHEETS_ENDPOINT
-        ? fetch(`${SHEETS_ENDPOINT}?data=${encodeURIComponent(JSON.stringify(payload))}`, { mode: 'no-cors' }).catch(() => {})
-        : Promise.resolve()
+      const sheetsPromise = fetch('/api/sheets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(() => {})
 
       const [response] = await Promise.all([formspreePromise, sheetsPromise])
       if (!response.ok) throw new Error('Submission failed')
