@@ -93,8 +93,6 @@
   height: 5rem;
   flex-shrink: 0;
   object-fit: contain;
-  mix-blend-mode: multiply;
-  object-fit: contain;
   padding: 0.25rem;
   border: 1px solid rgba(111, 45, 39, 0.1);
   border-radius: 0.55rem;
