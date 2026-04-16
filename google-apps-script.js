@@ -24,10 +24,13 @@
 // Timestamps use Eastern time (America/Detroit).
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ── Spreadsheet ID (from the URL of your Google Sheet) ───────────────────────
+var SPREADSHEET_ID = '13VmPh57SttPcSvugKIh9gtetEZqEgKULo2hT9j_H_h0'
+
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents)
-    var ss = SpreadsheetApp.getActiveSpreadsheet()
+    var ss = SpreadsheetApp.openById(SPREADSHEET_ID)
     var now = Utilities.formatDate(
       new Date(),
       'America/Detroit',
