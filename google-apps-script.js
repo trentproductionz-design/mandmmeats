@@ -27,6 +27,12 @@
 // ── Spreadsheet ID (from the URL of your Google Sheet) ───────────────────────
 var SPREADSHEET_ID = '13VmPh57SttPcSvugKIh9gtetEZqEgKULo2hT9j_H_h0'
 
+// ── Row styling ───────────────────────────────────────────────────────────────
+var ROW_HEIGHT      = 36
+var COLOR_ODD       = '#ffffff'
+var COLOR_EVEN      = '#fdf4f2'  // light warm blush, matches brand
+var NAME_COL        = 2          // "Customer Name" is always column B
+
 function doGet(e) {
   try {
     if (!e || !e.parameter || !e.parameter.data) {
@@ -66,14 +72,49 @@ function getOrCreateSheet(ss, name, headers) {
   if (!sheet) {
     sheet = ss.insertSheet(name)
     sheet.appendRow(headers)
+
+    // Header row styling
     var headerRange = sheet.getRange(1, 1, 1, headers.length)
     headerRange.setFontWeight('bold')
+    headerRange.setFontSize(11)
     headerRange.setBackground('#2d1a16')
     headerRange.setFontColor('#ffffff')
+    headerRange.setVerticalAlignment('middle')
+    headerRange.setHorizontalAlignment('center')
+    sheet.setRowHeight(1, 40)
     sheet.setFrozenRows(1)
-    sheet.setColumnWidth(1, 160) // Submitted column
+
+    // Column widths
+    sheet.setColumnWidth(1, 155)  // Submitted
+    sheet.setColumnWidth(2, 160)  // Customer Name
+    sheet.setColumnWidth(3, 130)  // Phone
+    sheet.setColumnWidth(4, 140)  // Farmer
+    // remaining columns auto-sized after first row is written
   }
   return sheet
+}
+
+function formatRow(sheet, rowIndex, numCols) {
+  var range = sheet.getRange(rowIndex, 1, 1, numCols)
+
+  // Alternating row color
+  range.setBackground(rowIndex % 2 === 0 ? COLOR_EVEN : COLOR_ODD)
+
+  // Row height & vertical alignment
+  sheet.setRowHeight(rowIndex, ROW_HEIGHT)
+  range.setVerticalAlignment('middle')
+
+  // Bold the customer name
+  sheet.getRange(rowIndex, NAME_COL).setFontWeight('bold')
+
+  // Auto-size all columns to fit content
+  sheet.autoResizeColumns(1, numCols)
+
+  // Keep the first four columns at minimum widths after auto-resize
+  if (sheet.getColumnWidth(1) < 155) sheet.setColumnWidth(1, 155)
+  if (sheet.getColumnWidth(2) < 160) sheet.setColumnWidth(2, 160)
+  if (sheet.getColumnWidth(3) < 130) sheet.setColumnWidth(3, 130)
+  if (sheet.getColumnWidth(4) < 140) sheet.setColumnWidth(4, 140)
 }
 
 // ── Beef ─────────────────────────────────────────────────────────────────────
@@ -136,6 +177,7 @@ function appendBeef(ss, d, now) {
     d.organs,
     d.specialInstructions,
   ])
+  formatRow(sheet, sheet.getLastRow(), headers.length)
 }
 
 // ── Pork ─────────────────────────────────────────────────────────────────────
@@ -182,6 +224,7 @@ function appendPork(ss, d, now) {
     d.brats,
     d.sausageLinks,
   ])
+  formatRow(sheet, sheet.getLastRow(), headers.length)
 }
 
 // ── Lamb ─────────────────────────────────────────────────────────────────────
@@ -214,4 +257,5 @@ function appendLamb(ss, d, now) {
     d.lambShanks,
     d.groundLamb,
   ])
+  formatRow(sheet, sheet.getLastRow(), headers.length)
 }
