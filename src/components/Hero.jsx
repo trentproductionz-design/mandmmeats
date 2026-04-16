@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="hero-copy">
         <p className="eyebrow">Locally sourced meat for your table.</p>
         <h1>
-          QAULITY MEATS,
+          QUALITY MEATS,
           <br />
           <span className="accent-text accent-text-nowrap">PROCESSED RIGHT.</span>
         </h1>
