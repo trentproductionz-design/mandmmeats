@@ -11,7 +11,7 @@ const initialForm = {
   roasts: '',
   loin: [],
   shoulder: [],
-  ribs: '',
+  ribs: [],
   belly: '',
   bellyThickness: '',
   hams: [],
@@ -60,7 +60,8 @@ function validateStep(step, form) {
     if (!form.roasts) errors.roasts = 'Please choose an option for Roasts.'
     if (!form.loin.length)
       errors.loin = 'Please select at least one option for Loin.'
-    if (!form.ribs) errors.ribs = 'Please choose an option for Ribs.'
+    if (!form.ribs.length)
+      errors.ribs = 'Please choose at least one option for Ribs.'
   }
 
   if (step === 2) {
@@ -193,7 +194,7 @@ export default function PorkCutSheet({ onBack }) {
         roasts: form.roasts,
         loin: form.loin.join(', '),
         shoulder: form.shoulder.length ? form.shoulder.join(', ') : '(none)',
-        ribs: form.ribs,
+        ribs: form.ribs.join(', '),
         belly: form.belly,
         bellyThickness: form.bellyThickness,
         hams: form.hams.join(', '),
@@ -274,7 +275,7 @@ export default function PorkCutSheet({ onBack }) {
           <h2>Your cut sheet is on its way.</h2>
           <p>
             Your completed pork cut sheet has been sent successfully. We will
-            review it before drop-off. If you need to make a change, call us at{' '}
+            review it before pick up. If you need to make a change, call us at{' '}
             <a href={`tel:${CUSTOM.phone}`}>{CUSTOM.phoneDisplay}</a>.
           </p>
         </div>
@@ -448,15 +449,13 @@ export default function PorkCutSheet({ onBack }) {
                 error={errors.shoulder}
               />
 
-              <RadioGroup
+              <CheckboxGroup
                 label="Ribs"
                 required
-                name="ribs"
                 options={['Spare Ribs', 'Country Style Ribs']}
                 value={form.ribs}
-                onChange={update('ribs')}
+                onChange={toggleMulti('ribs')}
                 error={errors.ribs}
-                cols={2}
               />
             </fieldset>
           )}
@@ -549,6 +548,7 @@ export default function PorkCutSheet({ onBack }) {
                 required
                 name="brats"
                 options={[
+                  'NONE',
                   'Regular',
                   'Polish',
                   'Italian',
@@ -565,6 +565,7 @@ export default function PorkCutSheet({ onBack }) {
                 required
                 name="sausageLinks"
                 options={[
+                  'NONE',
                   'Regular Links ($3/lb)',
                   'Maple Links ($4/lb)',
                   'Regular Patties ($1/lb)',
